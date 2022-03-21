@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Adaptor.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Adaptor.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.execute = execute;
+exports.create = create;
+exports.createPatient = createPatient;
+Object.defineProperty(exports, "alterState", {
+  enumerable: true,
+  get: function () {
+    return _languageCommon.alterState;
+  }
+});
+Object.defineProperty(exports, "dataPath", {
+  enumerable: true,
+  get: function () {
+    return _languageCommon.dataPath;
+  }
+});
+Object.defineProperty(exports, "dataValue", {
+  enumerable: true,
+  get: function () {
+    return _languageCommon.dataValue;
+  }
+});
+Object.defineProperty(exports, "each", {
+  enumerable: true,
+  get: function () {
+    return _languageCommon.each;
+  }
+});
+Object.defineProperty(exports, "field", {
+  enumerable: true,
+  get: function () {
+    return _languageCommon.field;
+  }
+});
+Object.defineProperty(exports, "fields", {
+  enumerable: true,
+  get: function () {
+    return _languageCommon.fields;
+  }
+});
+Object.defineProperty(exports, "http", {
+  enumerable: true,
+  get: function () {
+    return _languageCommon.http;
+  }
+});
+Object.defineProperty(exports, "lastReferenceValue", {
+  enumerable: true,
+  get: function () {
+    return _languageCommon.lastReferenceValue;
+  }
+});
+Object.defineProperty(exports, "merge", {
+  enumerable: true,
+  get: function () {
+    return _languageCommon.merge;
+  }
+});
+Object.defineProperty(exports, "sourceValue", {
+  enumerable: true,
+  get: function () {
+    return _languageCommon.sourceValue;
+  }
+});
+
+var _languageCommon = require("@openfn/language-common");
+
+/** @module Adaptor */
+const {
+  axios
+} = _languageCommon.http;
+exports.axios = axios;
+/**
+ * Execute a sequence of operations.
+ * Wraps `language-common/execute`, and prepends initial state for http.
+ * @example
+ * execute(
+ *   create('foo'),
+ *   delete('bar')
+ * )(state)
+ * @function
+ * @param {Operations} operations - Operations to be performed.
+ * @returns {Operation}
+ */
+
+function execute(...operations) {
+  const initialState = {
+    references: [],
+    data: null
+  };
+  return state => {
+    return (0, _languageCommon.execute)(...operations)({ ...initialState,
+      ...state
+    });
+  };
+}
+/**
+ * Creates some resource in a connected system
+ * @public
+ * @example
+ * create("/endpoint", {"foo": "bar"})
+ * @function
+ * @param {string} path - Path to resource
+ * @param {object} params - data to create the new resource
+ * @param {function} callback - (Optional) callback function
+ * @returns {Operation}
+ */
+
+
+function create(path, params, callback) {
+  return state => {
+    path = (0, _languageCommon.expandReferences)(path)(state);
+    params = (0, _languageCommon.expandReferences)(params)(state);
+    const {
+      baseUrl,
+      username,
+      password
+    } = state.configuration;
+    const url = `${baseUrl}/${path}`;
+    const auth = {
+      username,
+      password
+    };
+    const config = {
+      url,
+      body: params
+    };
+    return _languageCommon.http.post(config)(state).then(response => {
+      const nextState = { ...(0, _languageCommon.composeNextState)(state, response.data),
+        response
+      };
+      if (callback) return callback(nextState);
+      return nextState;
+    });
+  };
+}
+/**
+ * Creates some resource in a connected system to a known endpoint
+ * @public
+ * @example
+ * createPatient({"foo": "bar"})
+ * @function
+ * @param {object} params - data to create the new resource
+ * @param {function} callback - (Optional) callback function
+ * @returns {Operation}
+ */
+
+
+function createPatient(params, callback) {
+  return state => {
+    params = (0, _languageCommon.expandReferences)(params)(state);
+    const {
+      baseUrl,
+      username,
+      password
+    } = state.configuration;
+    const url = `${baseUrl}/patient`;
+    const auth = {
+      username,
+      password
+    };
+    const config = {
+      url,
+      body: params,
+      auth
+    };
+    return _languageCommon.http.post(config)(state).then(response => {
+      const nextState = { ...(0, _languageCommon.composeNextState)(state, response.data),
+        response
+      };
+      if (callback) return callback(nextState);
+      return nextState;
+    });
+  };
+} // What functions do you want from the common adaptor?
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Adaptor.html">Adaptor</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Fri May 14 2021 16:47:52 GMT+0000 (Greenwich Mean Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
