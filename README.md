@@ -1,6 +1,6 @@
-# language-template [<img src="https://avatars2.githubusercontent.com/u/9555108?s=200&v=4)" alt="alt text" height="20">](https://www.openfn.org) [![Build Status](https://travis-ci.org/OpenFn/language-template.svg?branch=master)](https://travis-ci.org/OpenFn/language-template)
+# language-fhir [<img src="https://avatars2.githubusercontent.com/u/9555108?s=200&v=4)" alt="alt text" height="20">](https://www.openfn.org) [![Build Status](https://travis-ci.org/OpenFn/language-fhir.svg?branch=master)](https://travis-ci.org/OpenFn/language-fhir)
 
-An OpenFn **_adaptor_** for building integration jobs for use with the \_\_\_\_ API.
+An OpenFn **_adaptor_** for building integration jobs for use with the FHIR server API.
 
 ## Documentation
 
