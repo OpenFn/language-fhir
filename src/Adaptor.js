@@ -112,6 +112,48 @@ export function createPatient(params, callback) {
   };
 }
 
+/**
+ * Creates a fictional transactionBundle in a fictional destination system using a POST request
+ * @public
+ * @example
+ * createTransactionBundle( {"entry": [{...},, {...}]})
+ * @function
+ * @param {object} params - data to create the new transaction
+ * @param {function} callback - (Optional) callback function
+ * @returns {Operation}
+ */
+export function createTransactionBundle(params, callback) {
+  return state => {
+    params = expandReferences(params)(state);
+
+    const { resource, tokenType, accessToken } = state.configuration;
+
+    const url = resource;
+    const auth = `${tokenType} ${accessToken}`;
+
+    const config = {
+      url,
+      body: {
+        resourceType: 'Bundle',
+        type: 'transaction',
+        entry: params,
+      },
+      auth,
+    };
+
+    return http
+      .post(config)(state)
+      .then(response => {
+        const nextState = {
+          ...composeNextState(state, response.data),
+          response,
+        };
+        if (callback) return callback(nextState);
+        return nextState;
+      });
+  };
+}
+
 // What functions do you want from the common adaptor?
 export {
   alterState,

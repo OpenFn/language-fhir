@@ -115,6 +115,59 @@
         ]
       },
       "valid": true
+    },
+    {
+      "name": "createTransactionBundle",
+      "params": [
+        "params",
+        "callback"
+      ],
+      "docs": {
+        "description": "Creates a fictional transactionBundle in a fictional destination system using a POST request",
+        "tags": [
+          {
+            "title": "public",
+            "description": null,
+            "type": null
+          },
+          {
+            "title": "example",
+            "description": "createTransactionBundle( {\"entry\": [{...},, {...}]})"
+          },
+          {
+            "title": "function",
+            "description": null,
+            "name": null
+          },
+          {
+            "title": "param",
+            "description": "data to create the new transaction",
+            "type": {
+              "type": "NameExpression",
+              "name": "object"
+            },
+            "name": "params"
+          },
+          {
+            "title": "param",
+            "description": "(Optional) callback function",
+            "type": {
+              "type": "NameExpression",
+              "name": "function"
+            },
+            "name": "callback"
+          },
+          {
+            "title": "returns",
+            "description": null,
+            "type": {
+              "type": "NameExpression",
+              "name": "Operation"
+            }
+          }
+        ]
+      },
+      "valid": true
     }
   ],
   "exports": [],
