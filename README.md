@@ -9,18 +9,37 @@ API.
 - To update the documentation site, run:
   `./node_modules/.bin/jsdoc --readme ./README.md ./lib -d docs`
 
-## post
+## Technical Documentation
 
-#### sample configuration
+#### Sample State
+
+> See [credential schema ](./credential-schema.json)
 
 ```json
 {
-  "username": "taylor@openfn.org",
-  "password": "supersecret"
+  "configuration": {
+    "resource": "resource_url",
+    "authType": "Basic",
+    "token": "supersecrettoken"
+  }
 }
 ```
 
-#### sample expression using operation
+#### Creates a resource in a destination system using a POST request
+
+```js
+create('/endpoint', { foo: 'bar' });
+```
+
+#### Creates a transactionBundle for HAPI FHIR
+
+```js
+createTransactionBundle({
+  entry: [transactionBundle],
+});
+```
+
+#### To be removed
 
 ```js
 post({

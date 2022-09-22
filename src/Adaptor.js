@@ -36,7 +36,7 @@ export function execute(...operations) {
 }
 
 /**
- * Creates a fictional resource in a fictional destination system using a POST request
+ * Creates a resource in a destination system using a POST request
  * @public
  * @example
  * create("/endpoint", {"foo": "bar"})
@@ -75,45 +75,7 @@ export function create(path, params, callback) {
 }
 
 /**
- * Create a fictional patient in a fictional universe with a fictional REST api
- * @public
- * @example
- * createPatient({"foo": "bar"})
- * @function
- * @param {object} params - data to create the new resource
- * @param {function} callback - (Optional) callback function
- * @returns {Operation}
- */
-export function createPatient(params, callback) {
-  return state => {
-    params = expandReferences(params)(state);
-
-    const { baseUrl, username, password } = state.configuration;
-
-    const url = `${baseUrl}/patient`;
-    const auth = { username, password };
-
-    const config = {
-      url,
-      body: params,
-      auth,
-    };
-
-    return http
-      .post(config)(state)
-      .then(response => {
-        const nextState = {
-          ...composeNextState(state, response.data),
-          response,
-        };
-        if (callback) return callback(nextState);
-        return nextState;
-      });
-  };
-}
-
-/**
- * Creates a fictional transactionBundle in a fictional destination system using a POST request
+ * Creates a transactionBundle for HAPI FHIR
  * @public
  * @example
  * createTransactionBundle( {"entry": [{...},, {...}]})
@@ -126,10 +88,10 @@ export function createTransactionBundle(params, callback) {
   return state => {
     params = expandReferences(params)(state);
 
-    const { resource, tokenType, accessToken } = state.configuration;
+    const { resource, authType, token } = state.configuration;
 
     const url = resource;
-    const auth = `${tokenType} ${accessToken}`;
+    const auth = `${authType} ${token}`;
 
     const config = {
       url,
