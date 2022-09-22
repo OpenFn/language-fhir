@@ -3,6 +3,10 @@
 An OpenFn **_adaptor_** for building integration jobs for use with the HAPI FHIR
 API.
 
+## FHIR Documentation
+
+The Restfull API can be seen here: https://www.hl7.org/fhir/http.html
+
 ## Documentation
 
 - View the documentation at https://openfn.github.io/adaptor/
@@ -17,11 +21,9 @@ API.
 
 ```json
 {
-  "configuration": {
-    "resource": "resource_url",
-    "authType": "Basic",
-    "token": "supersecrettoken"
-  }
+  "resource": "resource_url",
+  "authType": "Basic",
+  "token": "supersecrettoken"
 }
 ```
 
@@ -37,16 +39,6 @@ create('/endpoint', { foo: 'bar' });
 createTransactionBundle({
   entry: [transactionBundle],
 });
-```
-
-#### To be removed
-
-```js
-post({
-  "url": "api/v1/forms/data/wide/json/formId",
-  "body": {"a":1}
-  "headers": {}
-})
 ```
 
 ## Development
