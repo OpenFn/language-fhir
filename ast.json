@@ -8,7 +8,7 @@
         "callback"
       ],
       "docs": {
-        "description": "Creates a fictional resource in a fictional destination system using a POST request",
+        "description": "Creates a resource in a destination system using a POST request",
         "tags": [
           {
             "title": "public",
@@ -64,66 +64,13 @@
       "valid": true
     },
     {
-      "name": "createPatient",
-      "params": [
-        "params",
-        "callback"
-      ],
-      "docs": {
-        "description": "Create a fictional patient in a fictional universe with a fictional REST api",
-        "tags": [
-          {
-            "title": "public",
-            "description": null,
-            "type": null
-          },
-          {
-            "title": "example",
-            "description": "createPatient({\"foo\": \"bar\"})"
-          },
-          {
-            "title": "function",
-            "description": null,
-            "name": null
-          },
-          {
-            "title": "param",
-            "description": "data to create the new resource",
-            "type": {
-              "type": "NameExpression",
-              "name": "object"
-            },
-            "name": "params"
-          },
-          {
-            "title": "param",
-            "description": "(Optional) callback function",
-            "type": {
-              "type": "NameExpression",
-              "name": "function"
-            },
-            "name": "callback"
-          },
-          {
-            "title": "returns",
-            "description": null,
-            "type": {
-              "type": "NameExpression",
-              "name": "Operation"
-            }
-          }
-        ]
-      },
-      "valid": true
-    },
-    {
       "name": "createTransactionBundle",
       "params": [
         "params",
         "callback"
       ],
       "docs": {
-        "description": "Creates a fictional transactionBundle in a fictional destination system using a POST request",
+        "description": "Creates a transactionBundle for HAPI FHIR",
         "tags": [
           {
             "title": "public",
