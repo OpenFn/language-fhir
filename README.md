@@ -3,31 +3,42 @@
 An OpenFn **_adaptor_** for building integration jobs for use with the HAPI FHIR
 API.
 
+## FHIR Documentation
+
+The Restfull API can be seen here: https://www.hl7.org/fhir/http.html
+
 ## Documentation
 
 - View the documentation at https://openfn.github.io/adaptor/
 - To update the documentation site, run:
   `./node_modules/.bin/jsdoc --readme ./README.md ./lib -d docs`
 
-## post
+## Technical Documentation
 
-#### sample configuration
+#### Sample State
+
+> See [credential schema ](./credential-schema.json)
 
 ```json
 {
-  "username": "taylor@openfn.org",
-  "password": "supersecret"
+  "resource": "resource_url",
+  "authType": "Basic",
+  "token": "supersecrettoken"
 }
 ```
 
-#### sample expression using operation
+#### Creates a resource in a destination system using a POST request
 
 ```js
-post({
-  "url": "api/v1/forms/data/wide/json/formId",
-  "body": {"a":1}
-  "headers": {}
-})
+create('/endpoint', { foo: 'bar' });
+```
+
+#### Creates a transactionBundle for HAPI FHIR
+
+```js
+createTransactionBundle({
+  entry: [transactionBundle],
+});
 ```
 
 ## Development

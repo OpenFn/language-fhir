@@ -8,7 +8,7 @@
         "callback"
       ],
       "docs": {
-        "description": "Creates a fictional resource in a fictional destination system using a POST request",
+        "description": "Creates a resource in a destination system using a POST request",
         "tags": [
           {
             "title": "public",
@@ -64,13 +64,13 @@
       "valid": true
     },
     {
-      "name": "createPatient",
+      "name": "createTransactionBundle",
       "params": [
         "params",
         "callback"
       ],
       "docs": {
-        "description": "Create a fictional patient in a fictional universe with a fictional REST api",
+        "description": "Creates a transactionBundle for HAPI FHIR",
         "tags": [
           {
             "title": "public",
@@ -79,7 +79,7 @@
           },
           {
             "title": "example",
-            "description": "createPatient({\"foo\": \"bar\"})"
+            "description": "createTransactionBundle( {\"entry\": [{...},, {...}]})"
           },
           {
             "title": "function",
@@ -88,7 +88,7 @@
           },
           {
             "title": "param",
-            "description": "data to create the new resource",
+            "description": "data to create the new transaction",
             "type": {
               "type": "NameExpression",
               "name": "object"
